@@ -19,3 +19,49 @@ Booking Service
                     | 
                     v 
                 Send Confirmation
+
+
+Successful Booking
+
+User
+ |
+ v
+Booking Service
+ |
+ v
+Reserve Seat
+ |
+ v
+Process Payment
+ |
+ v
+Payment Success
+ |
+ v
+Confirm Booking
+ |
+ v
+Send Notification
+
+
+Failed Booking
+
+User
+ |
+ v
+Booking Service
+ |
+ v
+Reserve Seat
+ |
+ v
+Process Payment
+ |
+ v
+Payment Failure
+ |
+ v
+Release Seat
+ |
+ v
+Cancel Booking
