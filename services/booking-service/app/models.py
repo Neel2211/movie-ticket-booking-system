@@ -17,3 +17,10 @@ class Seat(Base):
     show_id = Column(Integer, nullable=False)
     seat_number = Column(String, nullable=False)
     status = Column(String, nullable=False, default="AVAILABLE")
+
+class PaymentRequest(Base):
+    __tablename__ = "payment_requests"
+
+    id = Column(Integer, primary_key=True, index=True)
+    idempotency_key = Column(String, unique=True, nullable=False)
+    status = Column(String, nullable=False)

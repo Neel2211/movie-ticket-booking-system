@@ -1,12 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
-from app.models import Booking, Seat
+from app.models import Booking, Seat, PaymentRequest
 from app.schemas import (
     BookingCreate,
     BookingResponse,
     BookingStatusUpdate,
-    BookingProcessRequest
+    BookingProcessRequest,
+    PaymentRequestSchema
 )
 
 router = APIRouter()
@@ -175,4 +176,37 @@ def reserve_seat(
 
     return {
         "message": "Seat reserved"
+    }
+
+@router.post("/payments")
+def process_payment(
+    request: PaymentRequestSchema,
+    db: Session = Depends(get_db)
+):
+    existing = (
+        db.query(PaymentRequest)
+        .filter(
+            PaymentRequest.idempotency_key ==
+            request.idempotency_key
+        )
+        .first()
+    )
+
+    if existing:
+        return {
+            "message": "Duplicate request",
+            "idempotency_key": request.idempotency_key
+        }
+
+    payment = PaymentRequest(
+        idempotency_key=request.idempotency_key,
+        status="SUCCESS"
+    )
+
+    db.add(payment)
+    db.commit()
+
+    return {
+        "message": "Payment processed",
+        "idempotency_key": request.idempotency_key
     }

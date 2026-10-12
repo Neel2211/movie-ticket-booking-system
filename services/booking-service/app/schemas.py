@@ -21,3 +21,6 @@ class BookingStatusUpdate(BaseModel):
 
 class BookingProcessRequest(BaseModel):
     payment_success: bool
+
+class PaymentRequestSchema(BaseModel):
+    idempotency_key: str
