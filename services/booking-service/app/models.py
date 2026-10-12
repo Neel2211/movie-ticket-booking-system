@@ -10,3 +10,10 @@ class Booking(Base):
 	status = Column(String, nullable=False, default="PENDING")
 	created_at = Column(DateTime, default=datetime.utcnow)
 
+class Seat(Base):
+    __tablename__ = "seats"
+
+    seat_id = Column(Integer, primary_key=True, index=True)
+    show_id = Column(Integer, nullable=False)
+    seat_number = Column(String, nullable=False)
+    status = Column(String, nullable=False, default="AVAILABLE")

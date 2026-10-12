@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
-from app.models import Booking
+from app.models import Booking, Seat
 from app.schemas import (
     BookingCreate,
     BookingResponse,
@@ -146,4 +146,33 @@ def process_booking(
     return {
         "booking_id": booking.booking_id,
         "final_status": booking.status
+    }
+
+@router.post("/reserve-seat")
+def reserve_seat(
+    show_id: int,
+    seat_number: str,
+    db: Session = Depends(get_db)
+):
+    seat = (
+        db.query(Seat)
+        .filter(
+            Seat.show_id == show_id,
+            Seat.seat_number == seat_number
+        )
+        .first()
+    )
+
+    if seat.status != "AVAILABLE":
+        raise HTTPException(
+            status_code=400,
+            detail="Seat already reserved"
+        )
+
+    seat.status = "RESERVED"
+
+    db.commit()
+
+    return {
+        "message": "Seat reserved"
     }
