@@ -5,7 +5,8 @@ from app.models import Booking
 from app.schemas import (
     BookingCreate,
     BookingResponse,
-    BookingStatusUpdate
+    BookingStatusUpdate,
+    BookingProcessRequest
 )
 
 router = APIRouter()
@@ -101,3 +102,48 @@ def update_booking_status(
         "status": booking.status
     }
 
+@router.post("/bookings/{booking_id}/process")
+def process_booking(
+    booking_id: int,
+    request: BookingProcessRequest,
+    db: Session = Depends(get_db)
+):
+    booking = (
+        db.query(Booking)
+        .filter(Booking.booking_id == booking_id)
+        .first()
+    )
+
+    if booking is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Booking not found"
+        )
+
+    if booking.status != "PENDING":
+        raise HTTPException(
+            status_code=400,
+            detail="Booking must be in PENDING state"
+        )
+
+    # Simulate seat reservation
+    booking.status = "RESERVED"
+    db.commit()
+
+    # Simulate payment processing
+    if request.payment_success:
+        booking.status = "CONFIRMED"
+    else:
+        booking.status = "PAYMENT_FAILED"
+        db.commit()
+
+        # Saga compensation
+        booking.status = "CANCELLED"
+
+    db.commit()
+    db.refresh(booking)
+
+    return {
+        "booking_id": booking.booking_id,
+        "final_status": booking.status
+    }

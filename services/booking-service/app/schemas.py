@@ -18,3 +18,6 @@ class BookingResponse(BaseModel):
 
 class BookingStatusUpdate(BaseModel):
     status: str
+
+class BookingProcessRequest(BaseModel):
+    payment_success: bool
