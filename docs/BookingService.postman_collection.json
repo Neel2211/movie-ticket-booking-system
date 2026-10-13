@@ -1,0 +1,194 @@
+{
+  "info": {
+    "_postman_id": "61158e4d-a86f-4f94-b227-673c6500caff",
+    "name": "Booking Service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58815347",
+    "_collection_link": "https://go.postman.co/collection/58815347-61158e4d-a86f-4f94-b227-673c6500caff?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create Booking",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"user_id\": 1,\r\n  \"show_id\": 1,\r\n  \"seat_number\": \"A1\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8003/bookings",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8003",
+          "path": [
+            "bookings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Booking",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8003/bookings/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8003",
+          "path": [
+            "bookings",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Booking Status",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"status\": \"RESERVED\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8003/bookings/1/status",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8003",
+          "path": [
+            "bookings",
+            "1",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Process Booking Saga",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"payment_success\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8003/bookings/1/process",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8003",
+          "path": [
+            "bookings",
+            "1",
+            "process"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reserve Seat",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8003/reserve-seat?show_id=1&seat_number=A1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8003",
+          "path": [
+            "reserve-seat"
+          ],
+          "query": [
+            {
+              "key": "show_id",
+              "value": "1"
+            },
+            {
+              "key": "seat_number",
+              "value": "A1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Payment Idempotency",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idempotency_key\": \"PAY123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8003/payments",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8003",
+          "path": [
+            "payments"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
