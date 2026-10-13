@@ -29,3 +29,11 @@ Akshay
 
 Naveen
 - Payment Service
+
+Ports:
+
+8001 User Service
+8002 Show Service
+8003 Booking Service
+8004 Payment Service
+8005 Notification Service
