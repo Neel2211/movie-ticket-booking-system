@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.schemas import ErrorResponse, UserCreate, UserList, UserOut, UserStatus, UserUpdate
 from app.service import UserService
 
-router = APIRouter(prefix="/api/v1/users", tags=["users"])
+router = APIRouter(tags=["users"])
 
 E404 = {"model": ErrorResponse, "description": "User not found"}
 E409 = {"model": ErrorResponse, "description": "Business rule conflict"}

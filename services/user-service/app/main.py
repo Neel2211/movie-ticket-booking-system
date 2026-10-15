@@ -85,7 +85,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             conn.execute(text("SELECT 1"))
         return {"status": "ok", "service": settings.service_name}
 
-    api.include_router(router)
+    api.include_router(router, prefix="/api/v1/users")
+    api.include_router(router, prefix="/users", include_in_schema=False)
     return api
 
 

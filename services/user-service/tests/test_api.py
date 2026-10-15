@@ -49,3 +49,13 @@ def test_list_pagination_and_status_filter(client, make_user):
 def test_correlation_id_is_echoed_or_generated(client):
     assert client.get("/health", headers={"X-Request-ID": "abc-123"}).headers["X-Request-ID"] == "abc-123"
     assert client.get("/health").headers["X-Request-ID"]
+
+
+def test_contract_alias_paths_without_prefix(client):
+    """Team contract: POST /users and GET /users/{id} must also work."""
+    r = client.post("/users", json={"name": "Alias User", "email": "alias@example.com", "phone": "+919876543210"})
+    assert r.status_code == 201
+    uid = r.json()["id"]
+    assert client.get(f"/users/{uid}").status_code == 200
+    assert client.get(f"/api/v1/users/{uid}").status_code == 200  # same data on the versioned path
+    assert client.get("/users/missing").status_code == 404

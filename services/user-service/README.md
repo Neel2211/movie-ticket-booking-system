@@ -37,6 +37,9 @@ Swagger UI: http://localhost:8001/docs | OpenAPI JSON: http://localhost:8001/ope
 | POST | `/api/v1/users/{user_id}/activate` | 200 | 404, 409 |
 | POST | `/api/v1/users/{user_id}/deactivate` | 200 | 404, 409 |
 
+
+The same routes are also served without the version prefix (`POST /users`, `GET /users/{id}`, etc.) to match the team's integration contract. Swagger documents the `/api/v1` paths.
+
 Error format (all errors, including 404/422/500):
 
 ```json
