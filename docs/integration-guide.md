@@ -48,7 +48,7 @@ Supports idempotency_key
 
 ## Notification Service
 
-Port: 8005
+Port: 8006
 
 Required APIs
 

@@ -36,4 +36,4 @@ Ports:
 8002 Show Service
 8003 Booking Service
 8004 Payment Service
-8005 Notification Service
+8006 Notification Service

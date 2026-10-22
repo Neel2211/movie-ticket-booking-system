@@ -45,6 +45,6 @@ Request:
   "idempotency_key": "PAY123"
 }
 
-## Notification Service (Port 8005)
+## Notification Service (Port 8006)
 
 POST /notifications
