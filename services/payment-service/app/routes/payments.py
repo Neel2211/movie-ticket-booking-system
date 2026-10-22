@@ -67,3 +67,29 @@ def get_payment_by_booking(booking_id: int, db: Session = Depends(get_db)):
     if not payment:
         raise HTTPException(status_code=404, detail="Payment record for this booking not found")
     return payment
+
+@router.post("/{payment_id}/refund", status_code=status.HTTP_200_OK)
+def compensate_payment_saga(payment_id: int, db: Session = Depends(get_db)):
+    """
+    SAGA Compensation Endpoint: 
+    Triggers a refund/rollback for a given payment if a downstream service fails.
+    """
+    payment = db.query(PaymentModel).filter(PaymentModel.id == payment_id).first()
+    if not payment:
+        raise HTTPException(status_code=404, detail="Payment record not found")
+    
+    if payment.status == "REFUNDED":
+        return {"message": "Payment already refunded", "payment_id": payment.id, "status": "REFUNDED"}
+    
+    # Update payment status to REFUNDED (Compensating action)
+    payment.status = "REFUNDED"
+    db.commit()
+    db.refresh(payment)
+    
+    return {
+        "message": "SAGA Compensation executed successfully: Payment refunded.",
+        "payment_id": payment.id,
+        "booking_id": payment.booking_id,
+        "status": payment.status,
+        "gateway_transaction_id": payment.gateway_transaction_id
+    }
