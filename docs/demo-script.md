@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Demo Script
 
 ## Challenge 1 - Concurrency
@@ -64,3 +65,11 @@ Request:
 Expected:
 
 CANCELLED
+=======
+# Demonstration Walk-Through Script
+
+## 1. Service Health Check (1 min)
+Verify that the service container is active and accepting traffic:
+```bash
+curl http://localhost:8004/health
+>>>>>>> origin/feature/payment-service

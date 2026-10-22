@@ -1,0 +1,42 @@
+{
+  "info": {
+    "name": "Payment Service API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Process Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Idempotency-Key", "value": "uuid-v4-placeholder" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"booking_id\": 101,\n  \"amount\": 450.00,\n  \"currency\": \"INR\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8004/api/v1/payments",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8004",
+          "path": ["api", "v1", "payments"]
+        }
+      }
+    },
+    {
+      "name": "Get Payment Status",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8004/api/v1/payments/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8004",
+          "path": ["api", "v1", "payments", "1"]
+        }
+      }
+    }
+  ]
+}
