@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Header, HTTPException, status, Response
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 import uuid
 import json
 
@@ -43,7 +44,18 @@ def process_payment(
     )
 
     db.add(new_payment)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        # A concurrent request with the same Idempotency-Key committed first:
+        # replay its stored result instead of failing with HTTP 500
+        db.rollback()
+        existing_payment = db.query(PaymentModel).filter(PaymentModel.idempotency_key == idempotency_key).first()
+        if existing_payment is None:
+            raise
+        if existing_payment.response_payload:
+            return json.loads(existing_payment.response_payload)
+        return existing_payment
     db.refresh(new_payment)
 
     # Cache response payload as JSON string for safe idempotent replays
