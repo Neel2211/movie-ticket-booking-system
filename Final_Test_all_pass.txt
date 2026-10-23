@@ -1,0 +1,244 @@
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> .\.venv\Scripts\Activate.ps1
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> $services = @(
+>>     "services\user-service",
+>>     "services\show-services",
+>>     "services\booking-service",
+>>     "services\payment-service",
+>>     "services\notification-service"
+>> )
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> foreach ($service in $services) {
+>>     Write-Host "`n========== $service ==========" -ForegroundColor Cyan
+>>     Push-Location $service
+>>     try {
+>>         python -m pytest -v
+>>     }
+>>     finally {
+>>         Pop-Location
+>>     }
+>> }
+
+========== services\user-service ==========
+=================================================================== test session starts ===================================================================
+platform win32 -- Python 3.10.3, pytest-9.1.1, pluggy-1.7.0 -- D:\Akshay Bhandari\movie-ticket-booking-system\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Akshay Bhandari\movie-ticket-booking-system\services\user-service
+plugins: anyio-4.15.1
+collected 20 items
+
+tests/test_api.py::test_health PASSED                                                                                                                [  5%]
+tests/test_api.py::test_create_and_get PASSED                                                                                                        [ 10%]
+tests/test_api.py::test_get_unknown_user_uses_standard_error_format PASSED                                                                           [ 15%]
+tests/test_api.py::test_unknown_route_uses_standard_error_format PASSED                                                                              [ 20%]
+tests/test_api.py::test_update_profile PASSED                                                                                                        [ 25%]
+tests/test_api.py::test_update_to_taken_email_conflicts PASSED                                                                                       [ 30%]
+tests/test_api.py::test_list_pagination_and_status_filter PASSED                                                                                     [ 35%]
+tests/test_api.py::test_correlation_id_is_echoed_or_generated PASSED                                                                                 [ 40%]
+tests/test_api.py::test_contract_alias_paths_without_prefix PASSED                                                                                   [ 45%]
+tests/test_business_rules.py::test_br_u1_duplicate_email_rejected_case_insensitive PASSED                                                            [ 50%]
+tests/test_business_rules.py::test_br_u1_concurrent_same_email_exactly_one_wins PASSED                                                               [ 55%]
+tests/test_business_rules.py::test_br_u2_invalid_input_rejected[override0] PASSED                                                                    [ 60%]
+tests/test_business_rules.py::test_br_u2_invalid_input_rejected[override1] PASSED                                                                    [ 65%]
+tests/test_business_rules.py::test_br_u2_invalid_input_rejected[override2] PASSED                                                                    [ 70%]
+tests/test_business_rules.py::test_br_u2_invalid_input_rejected[override3] PASSED                                                                    [ 75%]
+tests/test_business_rules.py::test_br_u2_invalid_input_rejected[override4] PASSED                                                                    [ 80%]
+tests/test_business_rules.py::test_br_u2_phone_is_normalised PASSED                                                                                  [ 85%]
+tests/test_business_rules.py::test_br_u3_transition_rules_pure PASSED                                                                                [ 90%]
+tests/test_business_rules.py::test_br_u3_lifecycle_via_api PASSED                                                                                    [ 95%]
+tests/test_business_rules.py::test_br_u4_inactive_user_cannot_be_edited PASSED                                                                       [100%]
+
+==================================================================== warnings summary =====================================================================
+..\..\.venv\lib\site-packages\fastapi\testclient.py:1
+  D:\Akshay Bhandari\movie-ticket-booking-system\.venv\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================================================== 20 passed, 1 warning in 1.80s ==============================================================
+
+========== services\show-services ==========
+=================================================================== test session starts ===================================================================
+platform win32 -- Python 3.10.3, pytest-9.1.1, pluggy-1.7.0 -- D:\Akshay Bhandari\movie-ticket-booking-system\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Akshay Bhandari\movie-ticket-booking-system\services\show-services
+plugins: anyio-4.15.1
+collected 7 items
+
+tests/test_show_service.py::test_get_shows PASSED                                                                                                    [ 14%]
+tests/test_show_service.py::test_reserve_available_seat PASSED                                                                                       [ 28%]
+tests/test_show_service.py::test_cannot_reserve_same_seat_twice PASSED                                                                               [ 42%]
+tests/test_show_service.py::test_cannot_reserve_nonexistent_seat PASSED                                                                              [ 57%]
+tests/test_show_service.py::test_release_reserved_seat PASSED                                                                                        [ 71%]
+tests/test_show_service.py::test_cannot_release_available_seat PASSED                                                                                [ 85%]
+tests/test_show_service.py::test_twenty_concurrent_reservations PASSED                                                                               [100%]
+
+==================================================================== warnings summary =====================================================================
+..\..\.venv\lib\site-packages\fastapi\testclient.py:1
+  D:\Akshay Bhandari\movie-ticket-booking-system\.venv\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================================================== 7 passed, 1 warning in 1.70s ===============================================================
+
+========== services\booking-service ==========
+=================================================================== test session starts ===================================================================
+platform win32 -- Python 3.10.3, pytest-9.1.1, pluggy-1.7.0 -- D:\Akshay Bhandari\movie-ticket-booking-system\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Akshay Bhandari\movie-ticket-booking-system\services\booking-service
+plugins: anyio-4.15.1
+collected 0 items
+
+================================================================== no tests ran in 2.53s ==================================================================
+
+========== services\payment-service ==========
+=================================================================== test session starts ===================================================================
+platform win32 -- Python 3.10.3, pytest-9.1.1, pluggy-1.7.0 -- D:\Akshay Bhandari\movie-ticket-booking-system\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Akshay Bhandari\movie-ticket-booking-system\services\payment-service
+plugins: anyio-4.15.1
+collected 7 items
+
+tests/test_payments.py::test_create_payment_success PASSED                                                                                           [ 14%]
+tests/test_payments.py::test_create_payment_missing_idempotency_header PASSED                                                                        [ 28%]
+tests/test_payments.py::test_create_payment_invalid_amount PASSED                                                                                    [ 42%]
+tests/test_payments.py::test_payment_idempotency PASSED                                                                                              [ 57%]
+tests/test_payments.py::test_get_payment_by_id_success PASSED                                                                                        [ 71%]
+tests/test_payments.py::test_get_payment_not_found PASSED                                                                                            [ 85%]
+tests/test_payments.py::test_saga_compensation_refund PASSED                                                                                         [100%]
+
+==================================================================== warnings summary =====================================================================
+..\..\.venv\lib\site-packages\fastapi\testclient.py:1
+  D:\Akshay Bhandari\movie-ticket-booking-system\.venv\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+app\database.py:11
+  D:\Akshay Bhandari\movie-ticket-booking-system\services\payment-service\app\database.py:11: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+app\schemas.py:10
+  D:\Akshay Bhandari\movie-ticket-booking-system\services\payment-service\app\schemas.py:10: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.14/migration/
+    class PaymentResponse(BaseModel):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================================================== 7 passed, 3 warnings in 1.25s ==============================================================
+
+========== services\notification-service ==========
+=================================================================== test session starts ===================================================================
+platform win32 -- Python 3.10.3, pytest-9.1.1, pluggy-1.7.0 -- D:\Akshay Bhandari\movie-ticket-booking-system\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Akshay Bhandari\movie-ticket-booking-system\services\notification-service
+plugins: anyio-4.15.1
+collected 5 items
+
+tests/test_notifications.py::test_send_notification_success PASSED                                                                                   [ 20%]
+tests/test_notifications.py::test_send_notification_missing_message PASSED                                                                           [ 40%]
+tests/test_notifications.py::test_get_notification_by_id_success PASSED                                                                              [ 60%]
+tests/test_notifications.py::test_get_notification_not_found PASSED                                                                                  [ 80%]
+tests/test_notifications.py::test_health_check PASSED                                                                                                [100%]
+
+==================================================================== warnings summary =====================================================================
+..\..\.venv\lib\site-packages\fastapi\testclient.py:1
+  D:\Akshay Bhandari\movie-ticket-booking-system\.venv\lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+app\database.py:11
+  D:\Akshay Bhandari\movie-ticket-booking-system\services\notification-service\app\database.py:11: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+app\schemas.py:11
+  D:\Akshay Bhandari\movie-ticket-booking-system\services\notification-service\app\schemas.py:11: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.14/migration/
+    class NotificationResponse(BaseModel):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================================================== 5 passed, 3 warnings in 1.13s ==============================================================
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> $ports = 8001, 8002, 8003, 8004, 8005
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> foreach ($port in $ports) {
+>>     $url = "http://127.0.0.1:$port/health"
+>>     try {
+>>         $response = Invoke-RestMethod -Uri $url -Method Get -TimeoutSec 5
+>>         Write-Host "PASS: $url" -ForegroundColor Green
+>>         $response | ConvertTo-Json -Depth 5
+>>     }
+>>     catch {
+>>         Write-Host "FAIL: $url" -ForegroundColor Red
+>>         Write-Host $_.Exception.Message
+>>     }
+>> }
+PASS: http://127.0.0.1:8001/health
+{
+    "status":  "ok",
+    "service":  "user-service"
+}
+PASS: http://127.0.0.1:8002/health
+{
+    "status":  "ok",
+    "service":  "show-service"
+}
+PASS: http://127.0.0.1:8003/health
+{
+    "status":  "Booking Service Healthy"
+}
+PASS: http://127.0.0.1:8004/health
+{
+    "status":  "healthy",
+    "service":  "payment-service"
+}
+FAIL: http://127.0.0.1:8005/health
+Unable to connect to the remote server
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> $ports = 8001, 8002, 8003, 8004, 8005
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> foreach ($port in $ports) {
+>>     $url = "http://127.0.0.1:$port/health"
+>>     try {
+>>         $response = Invoke-RestMethod -Uri $url -Method Get -TimeoutSec 5
+>>         Write-Host "PASS: $url" -ForegroundColor Green
+>>         $response | ConvertTo-Json -Depth 5
+>>     }
+>>     catch {
+>>         Write-Host "FAIL: $url" -ForegroundColor Red
+>>         Write-Host $_.Exception.Message
+>>     }
+>> }^C
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> $ports = 8001, 8002, 8003, 8004, 8006
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system> foreach ($port in $ports) {
+>>     $url = "http://127.0.0.1:$port/health"
+>>     try {
+>>         $response = Invoke-RestMethod -Uri $url -Method Get -TimeoutSec 5
+>>         Write-Host "PASS: $url" -ForegroundColor Green
+>>         $response | ConvertTo-Json -Depth 5
+>>     }
+>>     catch {
+>>         Write-Host "FAIL: $url" -ForegroundColor Red
+>>         Write-Host $_.Exception.Message
+>>     }
+>> }
+PASS: http://127.0.0.1:8001/health
+{
+    "status":  "ok",
+    "service":  "user-service"
+}
+PASS: http://127.0.0.1:8002/health
+{
+    "status":  "ok",
+    "service":  "show-service"
+}
+PASS: http://127.0.0.1:8003/health
+{
+    "status":  "Booking Service Healthy"
+}
+PASS: http://127.0.0.1:8004/health
+{
+    "status":  "healthy",
+    "service":  "payment-service"
+}
+PASS: http://127.0.0.1:8006/health
+{
+    "status":  "healthy",
+    "service":  "notification-service"
+}
+(.venv) PS D:\Akshay Bhandari\movie-ticket-booking-system>
