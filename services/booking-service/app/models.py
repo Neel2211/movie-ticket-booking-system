@@ -4,7 +4,7 @@ from app.database import Base
 class Booking(Base):
 	__tablename__ = "bookings"
 	booking_id = Column(Integer, primary_key=True, index=True)
-	user_id = Column(Integer, nullable=False)
+	user_id = Column(String, nullable=False)
 	show_id = Column(Integer, nullable=False)
 	seat_number = Column(String, nullable=False)
 	status = Column(String, nullable=False, default="PENDING")
