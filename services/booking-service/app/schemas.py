@@ -2,13 +2,13 @@ from pydantic import BaseModel
 
 
 class BookingCreate(BaseModel):
-    user_id: int
+    user_id: str
     show_id: int
     seat_number: str
 
 class BookingResponse(BaseModel):
     booking_id: int
-    user_id: int
+    user_id: str
     show_id: int
     seat_number: str
     status: str
