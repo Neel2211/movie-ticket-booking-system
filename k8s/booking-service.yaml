@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booking-service
+  template:
+    metadata:
+      labels:
+        app: booking-service
+    spec:
+      containers:
+      - name: booking-service
+        image: movie-ticket-booking-system-booking-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8003
+        env:
+        - name: USER_SERVICE_URL
+          value: "http://user-service:8001"
+        - name: SHOW_SERVICE_URL
+          value: "http://show-service:8002"
+        - name: PAYMENT_SERVICE_URL
+          value: "http://payment-service:8004"
+        - name: NOTIFICATION_SERVICE_URL
+          value: "http://notification-service:8006"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking-service
+spec:
+  selector:
+    app: booking-service
+  ports:
+  - port: 8003
+    targetPort: 8003

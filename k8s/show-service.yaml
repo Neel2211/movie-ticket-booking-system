@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: show-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: show-service
+  template:
+    metadata:
+      labels:
+        app: show-service
+    spec:
+      containers:
+      - name: show-service
+        image: movie-ticket-booking-system-show-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8002
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: show-service
+spec:
+  selector:
+    app: show-service
+  ports:
+  - port: 8002
+    targetPort: 8002
