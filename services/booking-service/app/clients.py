@@ -5,10 +5,27 @@ database, it only calls their REST APIs.
 """
 import requests
 
-USER_SERVICE_URL = "http://127.0.0.1:8001"
-SHOW_SERVICE_URL = "http://127.0.0.1:8002"
-PAYMENT_SERVICE_URL = "http://127.0.0.1:8004"
-NOTIFICATION_SERVICE_URL = "http://127.0.0.1:8006"
+import os
+
+USER_SERVICE_URL = os.getenv(
+    "USER_SERVICE_URL",
+    "http://127.0.0.1:8001"
+)
+
+SHOW_SERVICE_URL = os.getenv(
+    "SHOW_SERVICE_URL",
+    "http://127.0.0.1:8002"
+)
+
+PAYMENT_SERVICE_URL = os.getenv(
+    "PAYMENT_SERVICE_URL",
+    "http://127.0.0.1:8004"
+)
+
+NOTIFICATION_SERVICE_URL = os.getenv(
+    "NOTIFICATION_SERVICE_URL",
+    "http://127.0.0.1:8006"
+)
 
 TIMEOUT_SECONDS = 5
 TICKET_PRICE = 250.0

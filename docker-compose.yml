@@ -1,0 +1,41 @@
+services:
+
+  user-service:
+    build: ./services/user-service
+    container_name: user-service
+    ports:
+      - "8001:8001"
+
+  show-service:
+    build: ./services/show-services
+    container_name: show-service
+    ports:
+      - "8002:8002"
+
+  payment-service:
+    build: ./services/payment-service
+    container_name: payment-service
+    ports:
+      - "8004:8004"
+
+  notification-service:
+    build: ./services/notification-service
+    container_name: notification-service
+    ports:
+      - "8006:8006"
+
+  booking-service:
+    build: ./services/booking-service
+    container_name: booking-service
+    ports:
+      - "8003:8003"
+    environment:
+      USER_SERVICE_URL: http://user-service:8001
+      SHOW_SERVICE_URL: http://show-service:8002
+      PAYMENT_SERVICE_URL: http://payment-service:8004
+      NOTIFICATION_SERVICE_URL: http://notification-service:8006
+    depends_on:
+      - user-service
+      - show-service
+      - payment-service
+      - notification-service

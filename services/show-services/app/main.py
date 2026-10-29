@@ -3,6 +3,7 @@ import os
 import time
 import uuid
 
+from app.speed_data import seed
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -61,7 +62,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
     engine = make_engine(resolved_url)
 
     Base.metadata.create_all(bind=engine)
-
+    seed()
     api.state.engine = engine
     api.state.session_factory = make_session_factory(engine)
 

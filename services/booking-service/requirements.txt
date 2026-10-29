@@ -19,5 +19,5 @@ SQLAlchemy==2.0.46
 starlette==1.7.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
-unicorn==2.1.4
 urllib3==2.8.0
+uvicorn[standard]>=0.30
