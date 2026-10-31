@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Database-Per-Service-ER">
+    <mxGraphModel dx="1367" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="user" value="USER SERVICE&#10;-------------------------&#10;USERS&#10;PK user_id&#10;name&#10;email&#10;phone&#10;status&#10;created_at&#10;updated_at"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;"
+          vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="280" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="shows" value="SHOW SERVICE&#10;-------------------------&#10;SHOWS&#10;PK show_id&#10;movie_name&#10;show_time"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="260" height="180" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="seats" value="SEATS&#10;PK seat_id&#10;FK show_id&#10;seat_number&#10;status"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="280" width="260" height="180" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="booking" value="BOOKING SERVICE&#10;-------------------------&#10;BOOKINGS&#10;PK booking_id&#10;user_id&#10;show_id&#10;seat_number&#10;status&#10;created_at"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;"
+          vertex="1" parent="1">
+          <mxGeometry x="820" y="40" width="280" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="payment" value="PAYMENT SERVICE&#10;-------------------------&#10;PAYMENTS&#10;PK payment_id&#10;booking_id&#10;amount&#10;idempotency_key&#10;status"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="220" y="620" width="300" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="notification" value="NOTIFICATION SERVICE&#10;-------------------------&#10;NOTIFICATIONS&#10;PK notification_id&#10;recipient&#10;subject&#10;message&#10;created_at"
+          style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;"
+          vertex="1" parent="1">
+          <mxGeometry x="760" y="620" width="320" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="show-seat-rel"
+          value="1 : N"
+          style="endArrow=none;html=1;strokeWidth=2;"
+          edge="1" parent="1" source="shows" target="seats">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="booking-user-ref"
+          value="API Reference"
+          style="dashed=1;endArrow=open;strokeColor=#6c8ebf;"
+          edge="1" parent="1" source="booking" target="user">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="booking-show-ref"
+          value="API Reference"
+          style="dashed=1;endArrow=open;strokeColor=#82b366;"
+          edge="1" parent="1" source="booking" target="shows">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="payment-booking-ref"
+          value="API Reference"
+          style="dashed=1;endArrow=open;strokeColor=#b85450;"
+          edge="1" parent="1" source="payment" target="booking">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="notification-booking-ref"
+          value="API Reference"
+          style="dashed=1;endArrow=open;strokeColor=#9673a6;"
+          edge="1" parent="1" source="notification" target="booking">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
