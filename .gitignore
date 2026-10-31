@@ -23,4 +23,17 @@ venv/
 __pycache__/
 *.pyc
 *.db
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+
+venv/
+.venv/
+
+__pycache__/
+.pytest_cache/
+
+.env
+
 >>>>>>> origin/feature/booking-service
